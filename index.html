@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+body{
+  margin:0;
+  background:#ffd6e8;
+  font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+h1{padding:20px;}
+button{
+  padding:14px 28px;
+  border-radius:40px;
+  border:none;
+  font-size:16px;
+}
+#yes{
+  background:#ff4d6d;
+  color:white;
+  position:fixed;
+}
+#no{
+  background:white;
+  color:#ff4d6d;
+  margin-top:80px;
+}
+</style>
+</head>
+<body>
+
+<h1 id="question">Will you be my Valentine? ❤️</h1>
+
+<button id="yes">YES OF COURSE 💖</button>
+<br>
+<button id="no" onclick="alert('Try YES 😏')">NO THANK YOU</button>
+
+<script>
+let yesBtn=document.getElementById("yes");
+let count=0;
+let messages=[
+ "Are you sure? 😏",
+ "Really sure? 💕",
+ "Think again... 😜",
+ "Ready for forever? ❤️",
+ "No turning back 😌",
+ "Final answer? 💘",
+ "Okay click now 😍"
+];
+function move(){
+ if(count<messages.length){
+  document.getElementById("question").innerText=messages[count];
+  let x=Math.random()*(window.innerWidth-yesBtn.offsetWidth);
+  let y=Math.random()*(window.innerHeight-yesBtn.offsetHeight);
+  yesBtn.style.left=x+"px";
+  yesBtn.style.top=y+"px";
+  count++;
+ }else{
+  window.location.href="yes.html";
+ }
+}
+yesBtn.addEventListener("click",move);
+yesBtn.addEventListener("touchstart",move);
+</script>
+
+</body>
+</html>
