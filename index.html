@@ -14,9 +14,9 @@ body{
   text-align:center;
 }
 
-.topText{
+.top{
   position:fixed;
-  top:12%;
+  top:10%;
   width:100%;
   padding:20px;
 }
@@ -26,11 +26,12 @@ h1{
 }
 
 button{
-  padding:14px 28px;
+  padding:14px 26px;
   border:none;
   border-radius:40px;
   font-size:16px;
   cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #start{
@@ -49,7 +50,7 @@ button{
   background:white;
   color:#ff4d6d;
   position:fixed;
-  bottom:15%;
+  bottom:12%;
   left:50%;
   transform:translateX(-50%);
 }
@@ -57,33 +58,32 @@ button{
 </head>
 <body>
 
-<div class="topText" id="mainContent">
+<div class="top" id="content">
   <h1>Before I ask you something important... ❤️</h1>
-  <button id="start" onclick="startQuestion()">Are you ready? 💌</button>
+  <button id="start" onclick="begin()">Are you ready? 💌</button>
 </div>
 
 <script>
 
-function startQuestion(){
+function begin(){
 
-  document.getElementById("mainContent").innerHTML = `
-    <h1 id="question">Will you be my Valentine? ❤️</h1>
-  `;
+  document.getElementById("content").innerHTML =
+    "<h1 id='question'>Will you be my Valentine Ammu? ❤️</h1>";
 
-  let yesBtn = document.createElement("button");
-  yesBtn.innerText = "YES OF COURSE 💖";
+  const yesBtn = document.createElement("button");
   yesBtn.id = "yes";
+  yesBtn.innerText = "YES OF COURSE 💖";
   document.body.appendChild(yesBtn);
 
-  let noBtn = document.createElement("button");
-  noBtn.innerText = "NO THANK YOU";
+  const noBtn = document.createElement("button");
   noBtn.id = "no";
+  noBtn.innerText = "NO THANK YOU";
   noBtn.onclick = function(){ alert("You know the right answer 😌"); };
   document.body.appendChild(noBtn);
 
   let count = 0;
 
-  let messages = [
+  const messages = [
     "Are you sure? 😏",
     "Really sure? 💕",
     "Think again... 😜",
@@ -99,14 +99,15 @@ function startQuestion(){
 
       document.getElementById("question").innerText = messages[count];
 
-      // Only allow movement in lower half of screen
-      let maxX = window.innerWidth - yesBtn.offsetWidth;
-      let maxY = window.innerHeight - yesBtn.offsetHeight;
+      const buttonWidth = yesBtn.offsetWidth;
+      const buttonHeight = yesBtn.offsetHeight;
 
-      let minY = window.innerHeight * 0.45; // prevents overlap with text
+      const maxX = window.innerWidth - buttonWidth;
+      const minY = window.innerHeight * 0.45; // stays below text
+      const maxY = window.innerHeight - buttonHeight - 20;
 
-      let randomX = Math.random() * maxX;
-      let randomY = minY + Math.random() * (maxY - minY);
+      const randomX = Math.random() * maxX;
+      const randomY = minY + Math.random() * (maxY - minY);
 
       yesBtn.style.left = randomX + "px";
       yesBtn.style.top = randomY + "px";
