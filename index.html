@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For Someone Special ❤️</title>
+<title>For Ammu ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <style>
@@ -23,6 +23,7 @@ body{
 
 h1{
   margin:0;
+  font-size:24px;
 }
 
 button{
@@ -59,8 +60,8 @@ button{
 <body>
 
 <div class="top" id="content">
-  <h1>Before I ask you something important... ❤️</h1>
-  <button id="start" onclick="begin()">Are you ready? 💌</button>
+  <h1>Before I ask you something special... ❤️</h1>
+  <button id="start" onclick="begin()">Are you ready, Ammu? 💌</button>
 </div>
 
 <script>
@@ -78,19 +79,19 @@ function begin(){
   const noBtn = document.createElement("button");
   noBtn.id = "no";
   noBtn.innerText = "NO THANK YOU";
-  noBtn.onclick = function(){ alert("You know the right answer 😌"); };
+  noBtn.onclick = function(){ alert("Ammu... you know the right answer 😌"); };
   document.body.appendChild(noBtn);
 
   let count = 0;
 
   const messages = [
-    "Are you sure? 😏",
+    "Are you sure Ammu? 😏",
     "Really sure? 💕",
     "Think again... 😜",
-    "Ready for forever? ❤️",
+    "Ready for forever with me? ❤️",
     "No turning back now 😌",
     "Final answer? 💘",
-    "Okay click now 😍"
+    "Okay okay... click now 😍"
   ];
 
   function move(){
@@ -103,7 +104,7 @@ function begin(){
       const buttonHeight = yesBtn.offsetHeight;
 
       const maxX = window.innerWidth - buttonWidth;
-      const minY = window.innerHeight * 0.45; // stays below text
+      const minY = window.innerHeight * 0.45;
       const maxY = window.innerHeight - buttonHeight - 20;
 
       const randomX = Math.random() * maxX;
