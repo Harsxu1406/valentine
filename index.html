@@ -7,34 +7,36 @@
 <style>
 body{
   margin:0;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  background:#ffd6e8;
   font-family:-apple-system, BlinkMacSystemFont, sans-serif;
   height:100vh;
   overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   text-align:center;
-  color:white;
 }
 
-.container{
+.topText{
+  position:fixed;
+  top:12%;
+  width:100%;
   padding:20px;
 }
 
+h1{
+  margin:0;
+}
+
 button{
-  padding:14px 30px;
+  padding:14px 28px;
   border:none;
   border-radius:40px;
   font-size:16px;
   cursor:pointer;
-  margin-top:20px;
-  transition:0.3s;
 }
 
 #start{
-  background:white;
-  color:#ff4d6d;
+  background:#ff4d6d;
+  color:white;
+  margin-top:20px;
 }
 
 #yes{
@@ -46,40 +48,39 @@ button{
 #no{
   background:white;
   color:#ff4d6d;
-  margin-top:80px;
-}
-
-.fade{
-  animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+  position:fixed;
+  bottom:15%;
+  left:50%;
+  transform:translateX(-50%);
 }
 </style>
 </head>
 <body>
 
-<div class="container" id="mainContent">
-
-  <h1 class="fade">Before I ask you something important... ❤️</h1>
-  <p class="fade">I just want you to know you mean the world to me.</p>
+<div class="topText" id="mainContent">
+  <h1>Before I ask you something important... ❤️</h1>
   <button id="start" onclick="startQuestion()">Are you ready? 💌</button>
-
 </div>
 
 <script>
 
 function startQuestion(){
+
   document.getElementById("mainContent").innerHTML = `
     <h1 id="question">Will you be my Valentine? ❤️</h1>
-    <button id="yes">YES OF COURSE 💖</button>
-    <br>
-    <button id="no" onclick="alert('You know the right answer 😌')">NO THANK YOU</button>
   `;
 
-  let yesBtn = document.getElementById("yes");
+  let yesBtn = document.createElement("button");
+  yesBtn.innerText = "YES OF COURSE 💖";
+  yesBtn.id = "yes";
+  document.body.appendChild(yesBtn);
+
+  let noBtn = document.createElement("button");
+  noBtn.innerText = "NO THANK YOU";
+  noBtn.id = "no";
+  noBtn.onclick = function(){ alert("You know the right answer 😌"); };
+  document.body.appendChild(noBtn);
+
   let count = 0;
 
   let messages = [
@@ -93,16 +94,25 @@ function startQuestion(){
   ];
 
   function move(){
+
     if(count < messages.length){
+
       document.getElementById("question").innerText = messages[count];
 
-      let x = Math.random()*(window.innerWidth-yesBtn.offsetWidth);
-      let y = Math.random()*(window.innerHeight-yesBtn.offsetHeight);
+      // Only allow movement in lower half of screen
+      let maxX = window.innerWidth - yesBtn.offsetWidth;
+      let maxY = window.innerHeight - yesBtn.offsetHeight;
 
-      yesBtn.style.left = x+"px";
-      yesBtn.style.top = y+"px";
+      let minY = window.innerHeight * 0.45; // prevents overlap with text
+
+      let randomX = Math.random() * maxX;
+      let randomY = minY + Math.random() * (maxY - minY);
+
+      yesBtn.style.left = randomX + "px";
+      yesBtn.style.top = randomY + "px";
 
       count++;
+
     } else {
       window.location.href = "yes.html";
     }
@@ -110,6 +120,7 @@ function startQuestion(){
 
   yesBtn.addEventListener("click", move);
   yesBtn.addEventListener("touchstart", move);
+
 }
 
 </script>
